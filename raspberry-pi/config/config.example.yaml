@@ -1,15 +1,42 @@
-# Thresholds & settings for edge agent
-sampling_interval_seconds: 60
-moisture_threshold: 35          # percent volumetric water content
-min_irrigation_run_seconds: 120
-max_irrigation_run_seconds: 600
-backend_base_url: "http://localhost:8000"
-field_id: "demo-field-1"
-crop_stage: "vegetative"
+# Irrigation System Configuration
+# Edge agent settings for Raspberry Pi
+
+# Sensor sampling
+sampling_interval_seconds: 300  # 5 minutes
+data_upload_interval_seconds: 300  # Upload every reading
+
+# Irrigation thresholds
+moisture_threshold: 35          # Moisture % below which irrigation is considered
+min_irrigation_run_seconds: 120 # Minimum irrigation duration
+max_irrigation_run_seconds: 900 # Maximum irrigation duration (15 min)
+
+# Backend API connection
+backend_base_url: "http://192.168.1.100:8000"  # Change to your backend IP
+api_timeout_seconds: 10
+
+# Field identification
+field_id: "field-001"
+crop_stage: "vegetative"  # vegetative, flowering, fruiting
+location: "Farm North Field"
+
+# Hardware GPIO pins (BCM numbering)
 relay_gpio_pin: 18
 sensor:
-  soil_moisture_adc_channel: 0
-  dht22_pin: 4
+  soil_moisture_adc_channel: 0  # MCP3008 channel
+  dht22_pin: 4                  # GPIO pin for DHT22
+
+# Offline mode behavior
 offline_mode:
   enable: true
-  consecutive_dry_readings: 3
+  consecutive_dry_readings: 2   # Irrigate after this many consecutive dry readings
+  max_offline_hours: 12         # Switch to conservative mode after this time
+
+# Safety limits
+safety:
+  max_irrigation_per_day: 4     # Maximum irrigation cycles per day
+  min_time_between_cycles: 3600 # Minimum seconds between irrigation cycles
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  local_log_days: 7  # Keep local logs for this many days
