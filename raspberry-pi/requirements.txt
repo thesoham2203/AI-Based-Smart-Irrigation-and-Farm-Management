@@ -1,0 +1,5 @@
+requests>=2.31.0
+PyYAML>=6.0.1
+RPi.GPIO; platform_system=="Linux"
+adafruit-circuitpython-dht; platform_system=="Linux"
+paho-mqtt>=1.6.1

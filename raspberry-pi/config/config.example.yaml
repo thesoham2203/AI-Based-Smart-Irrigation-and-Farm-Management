@@ -1,0 +1,15 @@
+# Thresholds & settings for edge agent
+sampling_interval_seconds: 60
+moisture_threshold: 35          # percent volumetric water content
+min_irrigation_run_seconds: 120
+max_irrigation_run_seconds: 600
+backend_base_url: "http://localhost:8000"
+field_id: "demo-field-1"
+crop_stage: "vegetative"
+relay_gpio_pin: 18
+sensor:
+  soil_moisture_adc_channel: 0
+  dht22_pin: 4
+offline_mode:
+  enable: true
+  consecutive_dry_readings: 3
